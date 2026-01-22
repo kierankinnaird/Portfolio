@@ -1,3 +1,4 @@
+import DecryptedText from "../components/ui/DecryptedText"
 import styles from "./Home.module.css"
 
 export default function Home() {
@@ -6,7 +7,10 @@ export default function Home() {
       <div className={styles.container}>
         <p className={styles.kicker}>Developer Portfolio</p>
 
-        <h1 className={styles.title}>Kieran Kinnaird</h1>
+        <DecryptedText
+          text="Kieran Kinnaird"
+          className={styles.title}
+        />
 
         <p className={styles.description}>
           Building thoughtful web experiences with modern JavaScript and clean
