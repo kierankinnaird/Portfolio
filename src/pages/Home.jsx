@@ -1,3 +1,4 @@
+import { motion } from "motion/react"
 import DecryptedText from "../components/ui/DecryptedText"
 import styles from "./Home.module.css"
 
@@ -12,10 +13,19 @@ export default function Home() {
           className={styles.title}
         />
 
-        <p className={styles.description}>
+        <motion.p
+          className={styles.description}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut",
+            delay: 0.4,
+          }}
+        >
           Building thoughtful web experiences with modern JavaScript and clean
           architecture.
-        </p>
+        </motion.p>
       </div>
     </section>
   )
