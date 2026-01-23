@@ -1,6 +1,7 @@
 import { motion } from "motion/react"
 import DecryptedText from "../components/ui/DecryptedText"
 import styles from "./Home.module.css"
+import ProjectCard from "../components/ui/ProjectCard"
 
 export default function Home() {
   return (
@@ -38,6 +39,11 @@ export default function Home() {
             A small selection of projects focused on clean architecture,
             thoughtful UI, and practical problem solving.
           </p>
+        </div>
+        <div className={styles.projectsGrid}>
+          <ProjectCard />
+          <ProjectCard />
+          <ProjectCard />
         </div>
       </section>
     </>
