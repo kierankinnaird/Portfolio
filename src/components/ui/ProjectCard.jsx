@@ -13,8 +13,8 @@ export default function ProjectCard({
                 <span className={styles.status}>{status}</span>
             </header>
 
-            <p className={styles.description}>{tech}</p>
-            
+            <p className={styles.description}>{description}</p>
+
             <p className={styles.tech}>{tech}</p>
         </article>
     )

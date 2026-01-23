@@ -8,11 +8,12 @@
 
     border:1px solid rgba(255, 255, 255, 0.06);
 
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, transform 0.25s ease;
 }
 
 .card:hover {
     border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
 }
 
 .header{
@@ -25,6 +26,7 @@
 .title {
     font-size: 1.1rem;
     font-weight: 500;
+    color: var(--text);
 }
 
 .status {
@@ -44,4 +46,5 @@
     margin-top: 1rem;
     font-size: 0.85rem;
     color: var(--muted);
+    letter-spacing: 0.02em;
 }
