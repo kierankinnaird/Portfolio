@@ -4,29 +4,42 @@ import styles from "./Home.module.css"
 
 export default function Home() {
   return (
-    <section className={styles.hero}>
-      <div className={styles.container}>
-        <p className={styles.kicker}>Developer Portfolio</p>
+    <>
+      <section className={styles.hero}>
+        <div className={styles.container}>
+          <p className={styles.kicker}>Developer Portfolio</p>
 
-        <DecryptedText
-          text="Kieran Kinnaird"
-          className={styles.title}
-        />
+          <DecryptedText
+            text="Kieran Kinnaird"
+            className={styles.title}
+          />
 
-        <motion.p
-          className={styles.description}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            ease: "easeOut",
-            delay: 0.4,
-          }}
-        >
-          Building thoughtful web experiences with modern JavaScript and clean
-          architecture.
-        </motion.p>
-      </div>
-    </section>
+          <motion.p
+            className={styles.description}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+              delay: 0.4,
+            }}
+          >
+            Building thoughtful web experiences with modern JavaScript and clean
+            architecture.
+          </motion.p>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Selected Projects</h2>
+
+          <p className={styles.sectionSubtitle}>
+            A small selection of projects focused on clean architecture,
+            thoughtful UI, and practical problem solving.
+          </p>
+        </div>
+      </section>
+    </>
   )
 }
