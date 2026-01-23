@@ -32,20 +32,21 @@ export default function Home() {
       </section>
 
       <section className={styles.section}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Selected Projects</h2>
+  <div className={styles.container}>
+    <h2 className={styles.sectionTitle}>Selected Projects</h2>
 
-          <p className={styles.sectionSubtitle}>
-            A small selection of projects focused on clean architecture,
-            thoughtful UI, and practical problem solving.
-          </p>
-        </div>
-        <div className={styles.projectsGrid}>
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-        </div>
-      </section>
+    <p className={styles.sectionSubtitle}>
+      A small selection of projects focused on clean architecture,
+      thoughtful UI, and practical problem solving.
+    </p>
+
+    <div className={styles.projectsGrid}>
+      <ProjectCard />
+      <ProjectCard />
+      <ProjectCard />
+    </div>
+  </div>
+</section>
     </>
   )
 }

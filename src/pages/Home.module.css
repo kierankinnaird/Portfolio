@@ -1,12 +1,12 @@
 .hero {
-  min-height: 85vh;
-  padding-top: 20vh;
+  min-height: 75vh;
   padding-bottom: 6rem;
 }
 
 .container {
   max-width: 72rem;
   padding-inline: var(--space-md);
+  padding-top: 8rem;
 }
 
 .kicker {
@@ -40,13 +40,9 @@
     max-width: 50ch;
 }
 
-.hero {
-  padding-top: calc(20vh + 4rem);
-}
-
 .projectsGrid{
   margin-top: 3rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minimax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
 }
