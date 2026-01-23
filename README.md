@@ -27,4 +27,4 @@ The animated background is treated as a visual layer beneath the content, not as
 ## Status
 
 This portfolio is a work in progress.
-Projects, layout refinements, and accessibiolity improvements will be added incrementally.
+Projects, layout refinements, and accessibility improvements will be added incrementally.
