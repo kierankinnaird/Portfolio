@@ -33,6 +33,7 @@ export default function Home() {
 
       <section className={styles.section}>
   <div className={styles.container}>
+    <div className={styles.sectionDivider} />
     <h2 className={styles.sectionTitle}>Selected Projects</h2>
 
     <p className={styles.sectionSubtitle}>
@@ -45,6 +46,10 @@ export default function Home() {
       <ProjectCard />
       <ProjectCard />
     </div>
+
+    <p className={styles.comingSoon}>
+      More projects coming soon.
+    </p>
   </div>
 </section>
     </>
