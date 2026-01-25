@@ -1,8 +1,7 @@
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: left;
-  padding-top: 25vh;
+  align-items: center;
   position: relative;
 }
 
@@ -131,4 +130,9 @@
   opacity:0;
   transform: translateX(-50%) translateY(6px);
   pointer-events: none;
+}
+
+#about,
+#projects {
+  scroll-margin-top: 96px;
 }
