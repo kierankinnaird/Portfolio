@@ -89,6 +89,43 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <section id="contact" className={styles.section}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Contact</h2>
+
+          <p className={styles.contactText}>
+            If you'd like to get in touch, feel free to reach out via email or connect with me on LinkedIn or Github.
+          </p>
+
+          <ul className={styles.contactLinks}>
+            <li>
+              <a href="mailto:kieran@kinnaird.dev">
+                kieran@kinnaird.dev
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/kierankinnaird"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com/in/kierankinnaird"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
     </>
   );
 }

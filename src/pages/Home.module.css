@@ -136,3 +136,34 @@
 #projects {
   scroll-margin-top: 96px;
 }
+
+.contactText {
+  max-width: 55ch;
+  color: var(--muted);
+  margin-top: 1.5rem;
+  line-height: 1.6;
+}
+
+.contactLinks {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contactLinks a {
+  color: var(--text);
+  text-decoration: none;
+  position: relative;
+}
+
+.contactLinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+}
