@@ -93,36 +93,46 @@ export default function Home() {
       <section id="contact" className={styles.section}>
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>Contact</h2>
-
-          <p className={styles.contactText}>
-            If you'd like to get in touch, feel free to reach out via email or connect with me on LinkedIn or Github.
+          <p className={styles.sectionSubtitle}>
+            If you’d like to discuss a project, collaboration, or just say hello, feel free to reach out.
           </p>
-
-          <ul className={styles.contactLinks}>
-            <li>
+          
+          <div className={styles.contactGrid}>
+            <div className={styles.contactCard}>
+              <span className={styles.contactIcon}>✉️</span>
+              <h3>Email</h3>
+              <p>Best way to reach me directly.</p>
               <a href="mailto:kieran@kinnaird.dev">
                 kieran@kinnaird.dev
               </a>
-            </li>
-            <li>
+            </div>
+
+            <div className={styles.contactCard}>
+              <span className={styles.contactIcon}>💻</span>
+              <h3>GitHub</h3>
+              <p>View my code and ongoing work.</p>
               <a
                 href="https://github.com/kierankinnaird"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                GitHub
+                github.com/kierankinnaird
               </a>
-            </li>
-            <li>
+            </div>
+
+            <div className={styles.contactCard}>
+              <span className={styles.contactIcon}>🔗</span>
+              <h3>LinkedIn</h3>
+              <p>Connect with me professionally.</p>
               <a
                 href="https://linkedin.com/in/kierankinnaird"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                LinkedIn
+                linkedin.com/in/kierankinnaird
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </section>
 
