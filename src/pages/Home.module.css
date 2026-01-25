@@ -1,6 +1,8 @@
 .hero {
-  min-height: 75vh;
-  padding-bottom: 6rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: left;
+  padding-top: 25vh;
 }
 
 .container {
@@ -76,4 +78,11 @@
 .sectionTitle,
 .sectionSubtitle {
   max-width: 1100px;
+}
+
+.aboutText {
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-top: 1.5rem;
 }
