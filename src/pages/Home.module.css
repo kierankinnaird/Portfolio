@@ -3,6 +3,7 @@
   display: flex;
   align-items: left;
   padding-top: 25vh;
+  position: relative;
 }
 
 .container {
@@ -85,4 +86,41 @@
   color: var(--muted);
   line-height: 1.65;
   margin-top: 1.5rem;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 32px;
+  background: currentColor;
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0% {
+    transform: scaleY(0.6);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.6);
+    opacity: 0.4;
+  }
 }

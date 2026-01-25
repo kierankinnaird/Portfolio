@@ -29,6 +29,11 @@ export default function Home() {
             architecture.
           </motion.p>
         </div>
+
+        <div className={styles.scrollIndicator}>
+          <span>Scroll</span>
+          <div className={styles.scrollLine} />
+        </div>
       </section>
 
       <section className={styles.container}>
