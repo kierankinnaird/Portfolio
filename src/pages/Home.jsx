@@ -31,27 +31,40 @@ export default function Home() {
         </div>
       </section>
 
+      <section className={styles.container}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>About</h2>
+
+          <p className={styles.aboutText}>
+            I'm a computer science student with a strong interest in both software development and building thoughtful web applications. I enjoy working with modern technologies, focusing on clean architecture, maintainable code, and solving problems in a clear, practical way.
+          </p>
+
+          <p className={styles.aboutText}>
+            I'm currently developing my portfolio through personal projects alongside my studies, with the goal of building practical, real-world software and continuing to refine my technical and design skills.
+          </p>
+        </div>
+      </section>
+
       <section className={styles.section}>
-  <div className={styles.container}>
-    <div className={styles.sectionDivider} />
-    <h2 className={styles.sectionTitle}>Selected Projects</h2>
+        <div className={styles.container}>
+          <div className={styles.sectionDivider} />
+          <h2 className={styles.sectionTitle}>Selected Projects</h2>
 
-    <p className={styles.sectionSubtitle}>
-      A small selection of projects focused on clean architecture,
-      thoughtful UI, and practical problem solving.
-    </p>
+          <p className={styles.sectionSubtitle}>
+            A small selection of projects focused on clean architecture, thoughtful UI, and practical problem solving.
+          </p>
 
-    <div className={styles.projectsGrid}>
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-    </div>
+          <div className={styles.projectsGrid}>
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+          </div>
 
-    <p className={styles.comingSoon}>
-      More projects coming soon.
-    </p>
-  </div>
-</section>
+          <p className={styles.comingSoon}>
+            More projects coming soon.
+          </p>
+        </div>
+      </section>
     </>
   )
 }
