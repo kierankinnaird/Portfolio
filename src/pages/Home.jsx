@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <section className={styles.hero}>
+      <section id="home" className={styles.hero}>
         <div className={styles.container}>
           <p className={styles.kicker}>Developer Portfolio</p>
 
@@ -55,7 +55,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.container}>
+      <section id="about" className={styles.container}>
         <div className={styles.container}>
           <h2 className={styles.sectionTitle}>About</h2>
 
@@ -69,7 +69,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.section}>
+      <section id="projects" className={styles.section}>
         <div className={styles.container}>
           <div className={styles.sectionDivider} />
           <h2 className={styles.sectionTitle}>Selected Projects</h2>
