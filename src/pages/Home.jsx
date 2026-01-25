@@ -2,8 +2,24 @@ import { motion } from "motion/react"
 import DecryptedText from "../components/ui/DecryptedText"
 import styles from "./Home.module.css"
 import ProjectCard from "../components/ui/ProjectCard"
+import { useEffect, useState} from "react";
 
 export default function Home() {
+  const [hideScroll, setHideScroll] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        setHideScroll(true);
+      } else {
+        setHideScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <section className={styles.hero}>
@@ -25,12 +41,15 @@ export default function Home() {
               delay: 0.4,
             }}
           >
-            Building thoughtful web experiences with modern JavaScript and clean
-            architecture.
+            Building thoughtful web experiences with modern JavaScript and clean architecture.
           </motion.p>
         </div>
 
-        <div className={styles.scrollIndicator}>
+        <div
+          className={`${styles.scrollIndicator} ${
+            hideScroll ? styles.scrollHidden : ""
+          }`}
+        >
           <span>Scroll</span>
           <div className={styles.scrollLine} />
         </div>
@@ -71,5 +90,5 @@ export default function Home() {
         </div>
       </section>
     </>
-  )
+  );
 }
