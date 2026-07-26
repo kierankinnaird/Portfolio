@@ -3,7 +3,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-top: 2rem;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -35,7 +35,7 @@ a {
 }
 
 ::selection {
-  background: rgba(77, 212, 255, 0.25);
+  background: rgba(99, 242, 197, 0.25);
   color: #ffffff;
 }
 

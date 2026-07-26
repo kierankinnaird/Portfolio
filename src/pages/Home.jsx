@@ -1,141 +1,194 @@
 import { motion } from "motion/react"
-import DecryptedText from "../components/ui/DecryptedText"
 import styles from "./Home.module.css"
-import ProjectCard from "../components/ui/ProjectCard"
-import { useEffect, useState} from "react";
+
+const reveal = {
+  initial: { opacity: 0, y: 16 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.55, ease: "easeOut" },
+}
+
+const POISE_STATS = [
+  { value: "5", label: "movements screened" },
+  { value: "<2 min", label: "per screen" },
+  { value: "0-100", label: "movement score" },
+  { value: "100%", label: "on-device" },
+]
+
+const POISE_TECH = ["Flutter", "Dart", "Google ML Kit", "Firebase", "Stripe"]
+
+const ArrowUpRight = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden fill="none">
+    <path
+      d="M7 17 17 7M17 7H8M17 7v9"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
 
 export default function Home() {
-  const [hideScroll, setHideScroll] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 40) {
-        setHideScroll(true);
-      } else {
-        setHideScroll(false);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <>
-      <section id="home" className={styles.hero}>
-        <div className={styles.container}>
-          <p className={styles.kicker}>Developer Portfolio</p>
+      {/* ---------- About ---------- */}
+      <motion.section id="about" className={styles.section} {...reveal}>
+        <h2 className={styles.label}>
+          <span>01</span> / About
+        </h2>
+        <p className={styles.paragraph}>
+          I'm a computer science student and developer who likes turning fuzzy
+          problems into software that feels considered. I care about clean
+          architecture, maintainable code, and the small details most people
+          never notice.
+        </p>
+        <p className={styles.paragraph}>
+          Most of my focus right now goes into <strong>Poise</strong>, a mobile
+          app that turns a quick movement screen into objective performance data
+          for practitioners. The project below is where I'm putting these ideas
+          into practice.
+        </p>
+      </motion.section>
 
-          <DecryptedText
-            text="Kieran Kinnaird"
-            className={styles.title}
-          />
+      {/* ---------- Poise (featured) ---------- */}
+      <motion.section id="poise" className={styles.section} {...reveal}>
+        <h2 className={styles.label}>
+          <span>02</span> / Featured Project
+        </h2>
+        <h3 className={styles.poiseTitle}>Poise</h3>
+        <p className={styles.poiseTagline}>
+          A two-minute movement screen, tracked over time.
+        </p>
 
-          <motion.p
-            className={styles.description}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              ease: "easeOut",
-              delay: 0.4,
-            }}
+        <div className={styles.panel}>
+          <div className={styles.panelTop}>
+            <span className={styles.status}>
+              <span className={styles.statusDot} aria-hidden />
+              iOS · In development
+            </span>
+            <a
+              className={styles.inlineLink}
+              href="https://getpoise.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              getpoise.app <ArrowUpRight />
+            </a>
+          </div>
+
+          <p className={styles.poiseBody}>
+            Poise uses a phone's front camera and on-device pose detection to
+            screen five everyday movements: squat, lunge, single-leg stand, hip
+            hinge and shoulder rotation. It scores movement quality from 0 to 100
+            and tracks that score over time, giving practitioners an objective
+            performance metric for each client. It also pulls movement faults
+            that can suggest potential issues for the practitioner to review.
+            Every frame is processed on device, so only anonymised metrics leave
+            the phone, never raw video.
+          </p>
+
+          <div className={styles.stats}>
+            {POISE_STATS.map(stat => (
+              <div key={stat.label} className={styles.stat}>
+                <div className={styles.statValue}>{stat.value}</div>
+                <div className={styles.statLabel}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <ul className={styles.chips}>
+            {POISE_TECH.map(tech => (
+              <li key={tech} className={styles.chip}>
+                {tech}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            className={styles.panelCta}
+            href="https://getpoise.app"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Building thoughtful web experiences with modern JavaScript and clean architecture.
-          </motion.p>
+            Visit getpoise.app <ArrowUpRight />
+          </a>
+        </div>
+      </motion.section>
+
+      {/* ---------- Selected Work ---------- */}
+      <motion.section id="work" className={styles.section} {...reveal}>
+        <h2 className={styles.label}>
+          <span>03</span> / Selected Work
+        </h2>
+
+        <div className={styles.work}>
+          <a
+            className={styles.workItem}
+            href="https://github.com/kierankinnaird"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className={styles.workYear}>2026</span>
+            <span className={styles.workMain}>
+              <span className={styles.workName}>
+                Personal Portfolio <ArrowUpRight />
+              </span>
+              <span className={styles.workDesc}>
+                This site, designed and built from scratch.
+              </span>
+              <span className={styles.workTech}>React · Vite · Motion</span>
+            </span>
+          </a>
         </div>
 
-        <div
-          className={`${styles.scrollIndicator} ${
-            hideScroll ? styles.scrollHidden : ""
-          }`}
+        <p className={styles.workNote}>
+          More projects in progress. Check back soon.
+        </p>
+      </motion.section>
+
+      {/* ---------- Availability ---------- */}
+      <motion.section id="availability" className={styles.section} {...reveal}>
+        <h2 className={styles.label}>
+          <span>04</span> / Availability
+        </h2>
+        <div className={styles.availabilityCard}>
+          <h3 className={styles.availabilityTitle}>Open to placements</h3>
+          <p className={styles.availabilityText}>
+            I'm looking for a year-long industrial placement as part of my
+            degree, and I can start any time before September 2026.
+          </p>
+          <ul className={styles.facts}>
+            <li>Year-long placement</li>
+            <li>Start before Sept 2026</li>
+            <li>Anywhere in the UK</li>
+            <li>Full right to work</li>
+            <li>Full driving licence</li>
+          </ul>
+          <a className={styles.panelCta} href="#contact">
+            Get in touch <ArrowUpRight />
+          </a>
+        </div>
+      </motion.section>
+
+      {/* ---------- Contact ---------- */}
+      <motion.section id="contact" className={styles.section} {...reveal}>
+        <h2 className={styles.label}>
+          <span>05</span> / Contact
+        </h2>
+        <h3 className={styles.contactTitle}>Let's build something.</h3>
+        <p className={styles.contactText}>
+          I'm always happy to talk about projects, collaborations, or an
+          interesting problem. Email is the best way to reach me.
+        </p>
+        <a
+          className={styles.contactEmail}
+          href="mailto:kieran.kinnaird@mail.com"
         >
-          <span>Scroll</span>
-          <div className={styles.scrollLine} />
-        </div>
-      </section>
-
-      <section id="about" className={styles.container}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>About</h2>
-
-          <p className={styles.aboutText}>
-            I'm a computer science student with a strong interest in both software development and building thoughtful web applications. I enjoy working with modern technologies, focusing on clean architecture, maintainable code, and solving problems in a clear, practical way.
-          </p>
-
-          <p className={styles.aboutText}>
-            I'm currently developing my portfolio through personal projects alongside my studies, with the goal of building practical, real-world software and continuing to refine my technical and design skills.
-          </p>
-        </div>
-      </section>
-
-      <section id="projects" className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.sectionDivider} />
-          <h2 className={styles.sectionTitle}>Selected Projects</h2>
-
-          <p className={styles.sectionSubtitle}>
-            A small selection of projects focused on clean architecture, thoughtful UI, and practical problem solving.
-          </p>
-
-          <div className={styles.projectsGrid}>
-            <ProjectCard />
-            <ProjectCard />
-            <ProjectCard />
-          </div>
-
-          <p className={styles.comingSoon}>
-            More projects coming soon.
-          </p>
-        </div>
-      </section>
-
-      <section id="contact" className={styles.section}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Contact</h2>
-          <p className={styles.sectionSubtitle}>
-            If you’d like to discuss a project, collaboration, or just say hello, feel free to reach out.
-          </p>
-          
-          <div className={styles.contactGrid}>
-            <div className={styles.contactCard}>
-              <span className={styles.contactIcon}>✉️</span>
-              <h3>Email</h3>
-              <p>Best way to reach me directly.</p>
-              <a href="mailto:kieran@kinnaird.dev">
-                kieran@kinnaird.dev
-              </a>
-            </div>
-
-            <div className={styles.contactCard}>
-              <span className={styles.contactIcon}>💻</span>
-              <h3>GitHub</h3>
-              <p>View my code and ongoing work.</p>
-              <a
-                href="https://github.com/kierankinnaird"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                github.com/kierankinnaird
-              </a>
-            </div>
-
-            <div className={styles.contactCard}>
-              <span className={styles.contactIcon}>🔗</span>
-              <h3>LinkedIn</h3>
-              <p>Connect with me professionally.</p>
-              <a
-                href="https://linkedin.com/in/kierankinnaird"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                linkedin.com/in/kierankinnaird
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
+          kieran.kinnaird@mail.com <ArrowUpRight />
+        </a>
+        <p className={styles.contactNote}>That's mail.com, not gmail.com.</p>
+      </motion.section>
     </>
-  );
+  )
 }

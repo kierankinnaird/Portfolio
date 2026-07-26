@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import styles from "./Header.module.css"
+import Button from "../ui/Button"
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState("home")
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const sections = ["home", "about", "projects"]
@@ -29,31 +31,50 @@ export default function Header() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", onScroll)
+    onScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <nav className={styles.nav}>
         <a href="#home" className={styles.brand}>
+          <span className={styles.brandMark} aria-hidden />
           Kieran Kinnaird
         </a>
 
-        <ul className={styles.links}>
-          <li>
-            <a
-              href="#about"
-              className={activeSection === "about" ? styles.active : ""}
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a
-              href="#projects"
-              className={activeSection === "projects" ? styles.active : ""}
-            >
-              Projects
-            </a>
-          </li>
-        </ul>
+        <div className={styles.right}>
+          <ul className={styles.links}>
+            <li>
+              <a
+                href="#about"
+                className={activeSection === "about" ? styles.active : ""}
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#projects"
+                className={activeSection === "projects" ? styles.active : ""}
+              >
+                Projects
+              </a>
+            </li>
+          </ul>
+
+          <Button
+            href="#contact"
+            variant="secondary"
+            size="sm"
+            className={styles.navCta}
+          >
+            Contact
+          </Button>
+        </div>
       </nav>
     </header>
   )

@@ -22,6 +22,18 @@ export default function Background() {
         warpAmount={0}
         resolutionScale={1}
       />
+
+      {/* Contrast vignette: keeps the centre visible while darkening the
+          edges/bottom so foreground text stays legible over the shader. */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(120% 90% at 50% 22%, transparent 34%, rgba(7,7,11,0.5) 72%, rgba(7,7,11,0.9) 100%)",
+        }}
+      />
     </div>
   )
 }
