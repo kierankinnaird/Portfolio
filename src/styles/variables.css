@@ -1,17 +1,60 @@
 :root {
-  /* Colours */
-  --bg: #100c08;
-  --surface: #111418;
-  --text: #e6e6eb;
-  --muted: #9aa0aa;
-  --accent: #38bdf8;
+  /* ---------- Base palette (dark-first) ---------- */
+  --bg: #07070b;
+  --bg-elevated: #0e0e16;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-hover: rgba(255, 255, 255, 0.06);
 
-  /* Typography */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
 
-  /* Spacing scale */
+  --text: #f5f5fa;
+  --text-soft: #c9c9d6;
+  --muted: #8f8fa0;
+
+  /* ---------- Accents ---------- */
+  --accent: #4dd4ff;        /* electric cyan  */
+  --accent-strong: #24b6f0;
+  --accent-2: #a97bff;      /* violet         */
+  --accent-3: #ff7eb6;      /* rose highlight */
+
+  --gradient-accent: linear-gradient(
+    120deg,
+    #4dd4ff 0%,
+    #a97bff 55%,
+    #ff7eb6 100%
+  );
+  --gradient-accent-soft: linear-gradient(
+    120deg,
+    rgba(77, 212, 255, 0.16),
+    rgba(169, 123, 255, 0.16)
+  );
+  --gradient-text: linear-gradient(120deg, #ffffff 0%, #cfe9ff 40%, #c9b3ff 100%);
+
+  /* ---------- Glow / shadow ---------- */
+  --glow-accent: 0 0 48px rgba(77, 212, 255, 0.28);
+  --glow-violet: 0 0 60px rgba(169, 123, 255, 0.25);
+  --shadow-card: 0 24px 48px -24px rgba(0, 0, 0, 0.65);
+  --shadow-lift: 0 32px 64px -28px rgba(0, 0, 0, 0.7);
+
+  /* ---------- Typography ---------- */
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-display: "Space Grotesk", var(--font-sans);
+
+  /* ---------- Radii ---------- */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* ---------- Spacing scale ---------- */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
+  --space-xl: 7rem;
+
+  /* ---------- Layout ---------- */
+  --max-width: 1120px;
 }
