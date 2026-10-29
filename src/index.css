@@ -1,0 +1,6 @@
+/*
+ * Base theme now lives in src/styles/globals.css (imported in main.jsx).
+ * This file is intentionally minimal. The old Vite starter defaults
+ * (light-mode overrides, default button/link colours) were removed so
+ * they no longer fight the dark design system.
+ */

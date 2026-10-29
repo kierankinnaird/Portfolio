@@ -1,0 +1,37 @@
+.shell {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Subtle static accent glow, top-left, replacing the old WebGL veil. */
+.glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    46rem 32rem at 12% -4%,
+    rgba(99, 242, 197, 0.07),
+    transparent 60%
+  );
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 4rem);
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.content {
+  min-width: 0;
+  padding-block: clamp(3.5rem, 9vh, 6rem);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: minmax(320px, 42%) 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+}
