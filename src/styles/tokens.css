@@ -1,0 +1,109 @@
+/*
+ * Design tokens (DESIGN.md section 6). Components use these through Tailwind
+ * utilities (bg-bg, text-ink, p-16, text-title ...), never raw values.
+ */
+
+/* Colour. Dark is the default; the inline script in layout sets data-theme. */
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0b0c;
+  --ink: #f2f2ef;
+  --ink-muted: #8a8a86;
+  --rule: #2a2a2a;
+  --accent: #c3e41d;
+  --accent-ink: #0b0b0c;
+
+  --gutter: 24px;
+
+  /* Motion (section 6.4). Consumed by the reveal components in step 4. */
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --reveal-duration: 500ms;
+  --reveal-stagger-letter: 100ms;
+  --reveal-stagger-word: 150ms;
+  --reveal-distance: -20px;
+  --reveal-blur: 10px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f5f4f0;
+  --ink: #111111;
+  --ink-muted: #5e5e5a;
+  --rule: #d6d5d0;
+  /* Accent is unchanged but never used for text or thin lines on light. */
+  --accent-ink: #111111;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 48px;
+  }
+}
+
+/*
+ * Tailwind mapping. `initial` clears Tailwind's defaults so only the tokens
+ * below exist: one family, five text sizes, no shadows, no stray palette.
+ */
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --spacing-gutter: var(--gutter);
+}
+
+@theme {
+  --font-*: initial;
+  --font-sans: "TASA Orbiter Variable", system-ui, sans-serif;
+
+  --text-*: initial;
+  --text-display: clamp(5rem, 16vw, 13.5rem);
+  --text-display--line-height: 0.8;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 800;
+  --text-title: clamp(2rem, 4vw, 3rem);
+  --text-title--line-height: 1.1;
+  --text-title--font-weight: 600;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.4;
+  --text-lead--font-weight: 400;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5;
+  --text-body--font-weight: 400;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.4;
+  --text-small--font-weight: 500;
+
+  /* Named by pixel value, so p-16 is 16px. Replaces Tailwind's 4px multiplier
+     so off-scale values (p-5, mt-7 ...) do not exist. */
+  --spacing: initial;
+  --spacing-0: 0;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-16: 1rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-48: 3rem;
+  --spacing-64: 4rem;
+  --spacing-96: 6rem;
+  --spacing-128: 8rem;
+
+  --container-content: 90rem;
+
+  --radius-*: initial;
+  --radius-sm: 4px;
+
+  /* Depth comes from 1px rules and spacing, never shadows (section 5). */
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --blur-*: initial;
+}
