@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100svh;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* TASA Orbiter has no italic; never let the browser fake one. */
+  em,
+  i,
+  cite,
+  address {
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  /* Blur reveal (section 6.4): units start hidden, then animate in once the
+     wrapper is in view. The noscript rule in the layout shows them without JS. */
+  [data-blur-text="letter"] {
+    --reveal-stagger: var(--reveal-stagger-letter);
+  }
+
+  [data-blur-text="word"] {
+    --reveal-stagger: var(--reveal-stagger-word);
+  }
+
+  .blur-unit {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(var(--reveal-blur));
+    transform: translateY(var(--reveal-distance));
+  }
+
+  [data-revealed="true"] .blur-unit {
+    animation: blur-in var(--reveal-duration) ease-out forwards;
+    animation-delay: calc(var(--reveal-index) * var(--reveal-stagger));
+  }
+
+  @keyframes blur-in {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  /* The portrait journey. The photo exists twice: a static capsule in the hero
+     (.hero-capsule) and the photo in the About column (.traveller). Without
+     JS, or with reduced motion, both simply sit where they are laid out.
+     With motion allowed, ScrollExpand sets data-journey on <html>, hides the
+     static capsule and drives the About photo from the scroll position: it
+     starts exactly over the capsule, opens to a circle, holds mid-screen as
+     the hero leaves, then glides into its column. --expand (0 to 1) is the
+     opening stage and --dock (0 to 1) the arrival; the rest are px values set
+     per frame (--tw/--th size, --tx/--ty offset from its column, --tr radius,
+     --photo-k photo height as a multiple of the frame).
+     The track is only made tall once ScrollExpand has confirmed that motion is
+     allowed (data-ready), so no-JS and reduced-motion visitors never scroll
+     through an empty pinned screen. */
+  .expand-track[data-ready="true"] {
+    height: 200svh; /* 1 stage + 1 stage of opening */
+  }
+
+  /* Same colour as the photo's own backdrop, on both themes, so the frame and
+     the photo read as one surface. */
+  .portrait-frame {
+    overflow: hidden;
+    background-color: var(--media-bg);
+  }
+
+  /* The photo keeps its proportions; --photo-k of 1.12 is the tight capsule
+     framing the hero was signed off with. */
+  .portrait-photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: none;
+    width: auto;
+    height: calc(var(--photo-k, 1.12) * 100%);
+    translate: -50% -50%;
+  }
+
+  .hero-capsule {
+    width: var(--portrait-w);
+    height: calc(var(--portrait-w) * 1.7);
+    border-radius: 9999px;
+    translate: -50% -50%;
+  }
+
+  .portrait-slot {
+    position: relative;
+    width: var(--about-portrait-w);
+    aspect-ratio: 10 / 17;
+  }
+
+  .traveller {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+  }
+
+  /* Where the journey will run (same conditions as ScrollExpand), the About
+     photo stays invisible until it is switched on. Otherwise it would be laid
+     out in the About column and then jump into the hero, which the browser
+     counts as a layout shift. Switching on hides the capsule and shows the
+     photo in the same frame. The noscript rule in the layout undoes this. */
+  @media (prefers-reduced-motion: no-preference) and (min-height: 32rem) {
+    .traveller {
+      visibility: hidden;
+    }
+
+    [data-journey="on"] .traveller {
+      visibility: visible;
+    }
+  }
+
+  [data-journey="on"] .hero-capsule {
+    visibility: hidden;
+  }
+
+  [data-journey="on"] .traveller {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    width: var(--tw);
+    height: var(--th);
+    border-radius: var(--tr);
+    translate: calc(-50% + var(--tx)) calc(-50% + var(--ty));
+  }
+
+  /* About text arrives as the photo docks. --dock (0 to 1) is unset without the
+     journey, so the text is simply visible. */
+  .about-text {
+    opacity: var(--dock, 1);
+  }
+
+  .name-slide-left {
+    translate: calc(var(--expand, 0) * -60vw) 0;
+  }
+
+  .name-slide-right {
+    translate: calc(var(--expand, 0) * 60vw) 0;
+  }
+
+  /* Opacity is clamped by the browser, so this reaches 0 a third of the way in. */
+  .fade-on-expand {
+    opacity: calc(1 - var(--expand, 0) * 3);
+  }
+
+  /* The cue travels down 3rem over the opening stage while it fades. */
+  .cue-drift {
+    translate: 0 calc(var(--expand, 0) * 3rem);
+  }
+
+  .expand-track[data-covered="true"] .scroll-cue {
+    visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-capsule {
+      transition: scale var(--duration-base);
+    }
+
+    .hero-capsule:hover {
+      scale: 1.04;
+    }
+
+    /* Scroll cue: the chevron drops and returns. Movement only, no glow or
+       flashing. */
+    .scroll-cue svg {
+      animation: cue-drop var(--cue-duration) ease-in-out infinite;
+    }
+  }
+
+  @keyframes cue-drop {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 8px;
+    }
+  }
+
+  /* Reduced motion: final state at once, no blur, translate or stagger. */
+  @media (prefers-reduced-motion: reduce) {
+    .blur-unit,
+    [data-revealed="true"] .blur-unit {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      animation: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
