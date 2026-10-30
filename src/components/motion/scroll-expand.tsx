@@ -117,10 +117,13 @@ export function ScrollExpand({ children }: ScrollExpandProps) {
       const centreX = lerp(openX, slotX, docked);
       const centreY = lerp(openY, slotY, docked);
 
+      // Offsets are from the middle of the screen, where the fixed photo is
+      // anchored. Once docked it is placed by its slot instead.
+      traveller.dataset.docked = String(docked >= 1);
       traveller.style.setProperty("--tw", `${width}px`);
       traveller.style.setProperty("--th", `${height}px`);
-      traveller.style.setProperty("--tx", `${centreX - slotX}px`);
-      traveller.style.setProperty("--ty", `${centreY - slotY}px`);
+      traveller.style.setProperty("--tx", `${centreX - stageW / 2}px`);
+      traveller.style.setProperty("--ty", `${centreY - stageH / 2}px`);
       traveller.style.setProperty("--tr", `${Math.min(width, height) / 2}px`);
       traveller.style.setProperty(
         "--photo-k",
@@ -151,6 +154,7 @@ export function ScrollExpand({ children }: ScrollExpandProps) {
       ]) {
         traveller.style.removeProperty(name);
       }
+      delete traveller.dataset.docked;
       about.style.removeProperty("--dock");
       track.style.setProperty("--expand", "0");
       delete track.dataset.ready;

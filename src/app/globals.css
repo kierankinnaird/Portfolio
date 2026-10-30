@@ -75,7 +75,7 @@
      starts exactly over the capsule, opens to a circle, holds mid-screen as
      the hero leaves, then glides into its column. --expand (0 to 1) is the
      opening stage and --dock (0 to 1) the arrival; the rest are px values set
-     per frame (--tw/--th size, --tx/--ty offset from its column, --tr radius,
+     per frame (--tw/--th size, --tx/--ty offset from screen centre, --tr radius,
      --photo-k photo height as a multiple of the frame).
      The track is only made tall once ScrollExpand has confirmed that motion is
      allowed (data-ready), so no-JS and reduced-motion visitors never scroll
@@ -141,15 +141,25 @@
     visibility: hidden;
   }
 
-  [data-journey="on"] .traveller {
+  /* Until it has docked, the photo is pinned to the screen by the browser
+     (fixed), not placed in the scrolling page and nudged back by script every
+     frame. On a phone the page scrolls on another thread, so script-corrected
+     positions arrive a frame late and shake. --tx/--ty are offsets from the
+     middle of the screen. 50svh matches the pinned stage, which is 100svh,
+     even while a phone's address bar is moving. Once docked (data-docked) it
+     falls back to filling its slot, so it scrolls with the page like any
+     other element. */
+  [data-journey="on"] .traveller:not([data-docked="true"]) {
+    position: fixed;
     inset: auto;
-    top: 50%;
+    top: 50svh;
     left: 50%;
     z-index: 10;
     width: var(--tw);
     height: var(--th);
     border-radius: var(--tr);
     translate: calc(-50% + var(--tx)) calc(-50% + var(--ty));
+    will-change: translate;
   }
 
   /* About text arrives as the photo docks. --dock (0 to 1) is unset without the
