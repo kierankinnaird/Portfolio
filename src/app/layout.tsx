@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import "@fontsource-variable/tasa-orbiter";
 
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { siteMetadata } from "@/lib/metadata";
 import { DEFAULT_THEME, themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
-// Placeholder metadata; replaced by lib/metadata.ts once content/site.ts exists.
-export const metadata: Metadata = {
-  title: "Portfolio",
-};
+export const metadata: Metadata = siteMetadata;
 
 interface RootLayoutProps {
   children: React.ReactNode;
