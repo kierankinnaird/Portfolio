@@ -15,7 +15,7 @@ export function HeroPortrait() {
       width={width}
       height={height}
       priority
-      sizes="130px"
+      sizes="clamp(44px, 9.5vw, 129px)"
       className="aspect-portrait w-portrait absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full object-cover transition-transform duration-300 motion-safe:hover:scale-104"
     />
   );

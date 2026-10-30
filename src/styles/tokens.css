@@ -18,6 +18,10 @@
 
   --gutter: 24px;
 
+  /* Widest average letter of the display type, in em. KINNAIRD measures about
+     0.56; the extra room covers wider letters in longer surnames. */
+  --name-fit: 0.65;
+
   /* Motion (section 6.4). Consumed by the reveal components in step 4. */
   --duration-fast: 200ms;
   --duration-base: 300ms;
@@ -63,14 +67,26 @@
   --spacing-gutter: var(--gutter);
 }
 
+/*
+ * Hero name sizing. The size is the smaller of the viewport-based size and
+ * whatever lets the longest name line fit its container, so a long surname
+ * shrinks instead of wrapping. Needs --name-chars on the same element and a
+ * container (@container) somewhere above it.
+ */
+.name-fit {
+  --name-size: min(
+    clamp(3rem, 16vw, 13.5rem),
+    calc(100cqw / (var(--name-chars) * var(--name-fit)))
+  );
+}
+
 @theme {
   --font-*: initial;
   --font-sans: "TASA Orbiter Variable", system-ui, sans-serif;
 
   --text-*: initial;
-  /* Spec floor was 5rem, but KINNAIRD is ~4.4em wide: at 320px that needs
-     <= 61px to fit, so the floor is lowered and 16vw does the scaling. */
-  --text-display: clamp(3rem, 16vw, 13.5rem);
+  /* --text-display itself is defined in the inline block below, because it
+     depends on the per-hero --name-size. */
   --text-display--line-height: 0.8;
   --text-display--letter-spacing: -0.04em;
   --text-display--font-weight: 800;
@@ -111,10 +127,6 @@
   /* Keeps body-size lines inside 45-75 characters. */
   --container-measure: 40rem;
 
-  /* Hero portrait: 129x219 on desktop. Height tracks the name size (9.5vw x
-     1.7 ~ 16vw); the floor is below the spec's 65px because the name is
-     smaller on mobile and 65px hid most of its letters. */
-  --spacing-portrait: clamp(2.75rem, 9.5vw, 8.0625rem);
   --aspect-portrait: 10 / 17;
 
   --radius-*: initial;
@@ -126,4 +138,19 @@
   --drop-shadow-*: initial;
   --text-shadow-*: initial;
   --blur-*: initial;
+}
+
+/* After the resets above. Both follow --name-size, set per hero by .name-fit.
+   Display: 16vw with a 3rem floor (the spec's 5rem floor made KINNAIRD wrap at
+   320px), capped by what fits the container.
+   Portrait: 0.6 of the name size (129px at the 216px maximum). The floor is
+   44px, below the spec's 65px because the name is smaller on mobile and 65px
+   hid most of its letters; it drops further only for very long surnames. */
+@theme inline {
+  --text-display: var(--name-size, clamp(3rem, 16vw, 13.5rem));
+  --spacing-portrait: clamp(
+    min(2.75rem, calc(var(--name-size) * 0.9)),
+    calc(var(--name-size) * 0.6),
+    8.0625rem
+  );
 }

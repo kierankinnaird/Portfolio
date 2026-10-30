@@ -49,3 +49,4 @@ DESIGN.md
 .vscode/*
 !.vscode/extensions.json
 .idea
+.resources/
