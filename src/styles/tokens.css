@@ -101,6 +101,12 @@
   --spacing-96: 6rem;
   --spacing-128: 8rem;
 
+  /* Minimum touch target (section 4). */
+  --spacing-hit: 2.75rem;
+
+  /* Tracking for uppercase labels; display and body tracking stay as set. */
+  --tracking-label: 0.06em;
+
   --container-content: 90rem;
   /* Keeps body-size lines inside 45-75 characters. */
   --container-measure: 40rem;

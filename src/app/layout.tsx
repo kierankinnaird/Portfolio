@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/tasa-orbiter";
 
+import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { siteMetadata } from "@/lib/metadata";
 import { DEFAULT_THEME, themeInitScript } from "@/lib/theme";
@@ -24,7 +25,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </noscript>
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <SiteHeader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
