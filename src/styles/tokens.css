@@ -13,6 +13,8 @@
   --rule: #2a2a2a;
   --accent: #c3e41d;
   --accent-ink: #0b0b0c;
+  /* Hero name: accent on dark, plain ink on light (accent is not text there). */
+  --name: var(--accent);
 
   --gutter: 24px;
 
@@ -33,6 +35,7 @@
   --ink: #111111;
   --ink-muted: #5e5e5a;
   --rule: #d6d5d0;
+  --name: var(--ink);
   /* Accent is unchanged but never used for text or thin lines on light. */
   --accent-ink: #111111;
 }
@@ -55,6 +58,7 @@
   --color-rule: var(--rule);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-name: var(--name);
 
   --spacing-gutter: var(--gutter);
 }
@@ -64,7 +68,9 @@
   --font-sans: "TASA Orbiter Variable", system-ui, sans-serif;
 
   --text-*: initial;
-  --text-display: clamp(5rem, 16vw, 13.5rem);
+  /* Spec floor was 5rem, but KINNAIRD is ~4.4em wide: at 320px that needs
+     <= 61px to fit, so the floor is lowered and 16vw does the scaling. */
+  --text-display: clamp(3rem, 16vw, 13.5rem);
   --text-display--line-height: 0.8;
   --text-display--letter-spacing: -0.04em;
   --text-display--font-weight: 800;
@@ -96,6 +102,14 @@
   --spacing-128: 8rem;
 
   --container-content: 90rem;
+  /* Keeps body-size lines inside 45-75 characters. */
+  --container-measure: 40rem;
+
+  /* Hero portrait: 129x219 on desktop. Height tracks the name size (9.5vw x
+     1.7 ~ 16vw); the floor is below the spec's 65px because the name is
+     smaller on mobile and 65px hid most of its letters. */
+  --spacing-portrait: clamp(2.75rem, 9.5vw, 8.0625rem);
+  --aspect-portrait: 10 / 17;
 
   --radius-*: initial;
   --radius-sm: 4px;

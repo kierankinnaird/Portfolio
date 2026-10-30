@@ -37,6 +37,47 @@
     color: var(--accent-ink);
   }
 
+  /* Blur reveal (section 6.4): units start hidden, then animate in once the
+     wrapper is in view. The noscript rule in the layout shows them without JS. */
+  [data-blur-text="letter"] {
+    --reveal-stagger: var(--reveal-stagger-letter);
+  }
+
+  [data-blur-text="word"] {
+    --reveal-stagger: var(--reveal-stagger-word);
+  }
+
+  .blur-unit {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(var(--reveal-blur));
+    transform: translateY(var(--reveal-distance));
+  }
+
+  [data-revealed="true"] .blur-unit {
+    animation: blur-in var(--reveal-duration) ease-out forwards;
+    animation-delay: calc(var(--reveal-index) * var(--reveal-stagger));
+  }
+
+  @keyframes blur-in {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  /* Reduced motion: final state at once, no blur, translate or stagger. */
+  @media (prefers-reduced-motion: reduce) {
+    .blur-unit,
+    [data-revealed="true"] .blur-unit {
+      opacity: 1;
+      filter: none;
+      transform: none;
+      animation: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

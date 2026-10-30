@@ -19,6 +19,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" data-theme={DEFAULT_THEME} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <noscript>
+          <style>{`.blur-unit{opacity:1;filter:none;transform:none}`}</style>
+        </noscript>
       </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>

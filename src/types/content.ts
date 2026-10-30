@@ -4,8 +4,16 @@ export interface SiteContent {
     last: string;
   };
   tagline: string;
+  portrait: ImageContent;
   location?: string;
   socials: SocialLink[];
+}
+
+export interface ImageContent {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 export interface SocialLink {
