@@ -21,7 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <noscript>
-          <style>{`.blur-unit{opacity:1;filter:none;transform:none}`}</style>
+          <style>{`.blur-unit{opacity:1;filter:none;transform:none}.traveller{visibility:visible}`}</style>
         </noscript>
       </head>
       <body>

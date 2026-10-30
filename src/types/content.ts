@@ -5,6 +5,7 @@ export interface SiteContent {
   };
   tagline: string;
   portrait: ImageContent;
+  email: string;
   location?: string;
   socials: SocialLink[];
 }

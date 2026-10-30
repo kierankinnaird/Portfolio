@@ -11,10 +11,10 @@ export function HeroName() {
       aria-label={fullName}
       className="text-display text-name text-center uppercase"
     >
-      <span className="block">
+      <span className="name-slide-left block">
         <BlurText text={first} unit="letter" />
       </span>
-      <span className="block">
+      <span className="name-slide-right block">
         <BlurText text={last} unit="letter" startIndex={first.length} />
       </span>
     </h1>

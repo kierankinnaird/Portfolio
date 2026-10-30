@@ -13,10 +13,15 @@
   --rule: #2a2a2a;
   --accent: #c3e41d;
   --accent-ink: #0b0b0c;
+  /* Backdrop of the portrait photo; fixed, not themed. */
+  --media-bg: #0b0b0c;
   /* Hero name: accent on dark, plain ink on light (accent is not text there). */
   --name: var(--accent);
 
   --gutter: 24px;
+
+  /* Width of the portrait in the About column; height is 1.7x (the capsule). */
+  --about-portrait-w: clamp(11rem, 24vw, 20rem);
 
   /* Widest average letter of the display type, in em. KINNAIRD measures about
      0.56; the extra room covers wider letters in longer surnames. */
@@ -25,6 +30,7 @@
   /* Motion (section 6.4). Consumed by the reveal components in step 4. */
   --duration-fast: 200ms;
   --duration-base: 300ms;
+  --cue-duration: 1600ms;
   --reveal-duration: 500ms;
   --reveal-stagger-letter: 100ms;
   --reveal-stagger-word: 150ms;
@@ -78,6 +84,16 @@
     clamp(3rem, 16vw, 13.5rem),
     calc(100cqw / (var(--name-chars) * var(--name-fit)))
   );
+
+  /* Capsule portrait width: 0.6 of the name size (129px at the 216px maximum).
+     The floor is 44px, below the spec's 65px because the name is smaller on
+     mobile and 65px hid most of its letters; it drops further only for very
+     long surnames. Height is 1.7x this (the spec's 1 : 1.7 capsule). */
+  --portrait-w: clamp(
+    min(2.75rem, calc(var(--name-size) * 0.9)),
+    calc(var(--name-size) * 0.6),
+    8.0625rem
+  );
 }
 
 @theme {
@@ -127,8 +143,6 @@
   /* Keeps body-size lines inside 45-75 characters. */
   --container-measure: 40rem;
 
-  --aspect-portrait: 10 / 17;
-
   --radius-*: initial;
   --radius-sm: 4px;
 
@@ -140,17 +154,9 @@
   --blur-*: initial;
 }
 
-/* After the resets above. Both follow --name-size, set per hero by .name-fit.
-   Display: 16vw with a 3rem floor (the spec's 5rem floor made KINNAIRD wrap at
-   320px), capped by what fits the container.
-   Portrait: 0.6 of the name size (129px at the 216px maximum). The floor is
-   44px, below the spec's 65px because the name is smaller on mobile and 65px
-   hid most of its letters; it drops further only for very long surnames. */
+/* After the resets above. Follows --name-size, set per hero by .name-fit:
+   16vw with a 3rem floor (the spec's 5rem floor made KINNAIRD wrap at 320px),
+   capped by what fits the container. */
 @theme inline {
   --text-display: var(--name-size, clamp(3rem, 16vw, 13.5rem));
-  --spacing-portrait: clamp(
-    min(2.75rem, calc(var(--name-size) * 0.9)),
-    calc(var(--name-size) * 0.6),
-    8.0625rem
-  );
 }
