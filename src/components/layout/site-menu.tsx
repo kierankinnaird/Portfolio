@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { useClickOutside } from "@/hooks/use-click-outside";
+import { smoothScrollToHash } from "@/lib/scroll";
 import type { NavItem } from "@/types/content";
 
 interface SiteMenuProps {
@@ -31,6 +32,21 @@ export function SiteMenu({ items }: SiteMenuProps) {
   useEffect(() => {
     if (open) panelRef.current?.querySelector("a")?.focus();
   }, [open]);
+
+  // An anchor on the page we are already on scrolls there over time (so the
+  // portrait's journey plays) instead of Next's instant jump.
+  const onItemClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    const [path, hash] = href.split("#");
+    const samePageAnchor =
+      hash !== undefined && (path || pathname) === pathname;
+    if (samePageAnchor && smoothScrollToHash(`#${hash}`)) {
+      event.preventDefault();
+    }
+    closeAndRestoreFocus();
+  };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (open && event.key === "Escape") closeAndRestoreFocus();
@@ -71,7 +87,7 @@ export function SiteMenu({ items }: SiteMenuProps) {
             <Link
               href={item.href}
               aria-current={pathname === item.href ? "page" : undefined}
-              onClick={closeAndRestoreFocus}
+              onClick={(event) => onItemClick(event, item.href)}
               className="text-small tracking-label hover:bg-accent hover:text-accent-ink aria-[current=page]:border-ink block border-l-2 border-transparent p-16 uppercase transition-colors duration-200 focus-visible:-outline-offset-2 aria-[current=page]:font-semibold"
             >
               {item.label}

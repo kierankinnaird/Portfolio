@@ -171,6 +171,11 @@
     opacity: calc(1 - var(--expand, 0) * 3);
   }
 
+  /* The cue travels down 3rem over the opening stage while it fades. */
+  .cue-drift {
+    translate: 0 calc(var(--expand, 0) * 3rem);
+  }
+
   .expand-track[data-covered="true"] .scroll-cue {
     visibility: hidden;
   }

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+import { jumpToCurrentHash } from "@/lib/scroll";
+
 interface ScrollExpandProps {
   children: React.ReactNode;
 }
@@ -189,6 +191,13 @@ export function ScrollExpand({ children }: ScrollExpandProps) {
       }
     });
     sync();
+    // Arriving on /#about (a typed URL, or the menu from another page): the
+    // browser has already scrolled, but to where About was before the hero was
+    // made tall. Land on the real position, then redraw for it.
+    if (enabled && window.location.hash) {
+      jumpToCurrentHash();
+      update();
+    }
 
     return () => {
       if (frame) cancelAnimationFrame(frame);
