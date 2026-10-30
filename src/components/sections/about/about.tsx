@@ -24,15 +24,8 @@ export function About() {
           >
             {about.heading}
           </h2>
-          {about.paragraphs.map((paragraph, index) => (
-            <p
-              key={index}
-              className={
-                index === 0
-                  ? "text-title max-w-3xl"
-                  : "text-lead text-ink-muted max-w-measure"
-              }
-            >
+          {about.paragraphs.map((paragraph) => (
+            <p key={paragraph} className="text-lead max-w-measure">
               {paragraph}
             </p>
           ))}
